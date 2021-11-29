@@ -32,7 +32,7 @@ you can also custom css in `public/style.css`
 
 to run server use
 ```bash 
-bash main.js
+bash main.sh
 ```
 
 instead of 
