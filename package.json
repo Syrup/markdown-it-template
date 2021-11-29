@@ -1,0 +1,20 @@
+{
+  "name": "markdownitapp",
+  "version": "1.0.0",
+  "description": "This template provides an easy way to use NodeJS v16 on Replit! As of writing, NodeJS repls have Node v12, which is several years out of date.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "markdown-it": "latest",
+    "highlight.js": "latest",
+    "front-matter": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "markdown-it-task-lists": "latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

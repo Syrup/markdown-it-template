@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Rubik:wght@300&display=swap');
+
+div.container {
+  padding: 23px;
+  font-family: "Rubik", sans-serif;
+}
+
+div.container h1 {
+  font-family: "Poppins", sans-serif;
+}
+
+pre.hljs {
+  overflow-y: scroll;
+  border-radius: 2px !important;
+  padding: 10px;
+  width: 50%;
+}
+
+blockquote {
+  background-color: transparent;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+}
+
+blockquote:before {
+  color: #bababa;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+@media screen and (max-width: 600px) {
+  pre.hljs {
+    width: 90%
+  }
+}
