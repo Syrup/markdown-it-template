@@ -19,7 +19,8 @@ const md = require("markdown-it")({
     }
 
     return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
-  }
+  },
+  html: true
 });
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
 const http = require("http");

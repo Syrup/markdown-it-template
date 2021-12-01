@@ -12,9 +12,11 @@
     "front-matter": "latest",
     "ejs": "latest",
     "express": "latest",
-    "markdown-it-task-lists": "latest"
+    "markdown-it-task-lists": "latest",
+    "dotenv": "latest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
 }
+

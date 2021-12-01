@@ -47,6 +47,9 @@ if it's the first time
 
 that's all for now
 
+<details>
+  <summary>Footer</summary>
+  
 > TODO:
 >  1. [ ] Create a routing system
 >  2. [ ] Make it simpler
@@ -56,3 +59,4 @@ that's all for now
 > 2. [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists)
 > 3. [highlight.js](https://github.com/highlightjs/highlight.js/)
 > 4. [front-matter](https://github.com/jxson/front-matter)
+</details>
