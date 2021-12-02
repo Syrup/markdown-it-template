@@ -3,6 +3,8 @@
 div.container {
   padding: 23px;
   font-family: "Rubik", sans-serif;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 div.container h1 {

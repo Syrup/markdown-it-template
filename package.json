@@ -13,7 +13,10 @@
     "ejs": "latest",
     "express": "latest",
     "markdown-it-task-lists": "latest",
-    "dotenv": "latest"
+    "dotenv": "latest",
+    "mustache": "latest",
+    "toml": "latest",
+    "toml-require": "latest"
   },
   "keywords": [],
   "author": "",

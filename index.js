@@ -1,9 +1,13 @@
 require("dotenv").config()
+require("toml-require").install({
+  toml: require('toml')
+})
 const fs = require("fs");
 const frontMatter = require("front-matter");
 const hljs = require('highlight.js');
 const express = require("express");
 const path = require('path');
+const mustache = require("mustache")
 const app = express();
 app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
@@ -24,11 +28,16 @@ const md = require("markdown-it")({
 });
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
 const http = require("http");
-let data
+// let data
+const config = require("./config.toml")
+
 
 app.get("/article/:route", (req, res) => {
   let file = fs.readFileSync(`views/markdown/${req.params.route}.md`, { encoding: 'utf8' })
-  let data = frontMatter(file)
+  let pageConfig = frontMatter(file)
+  let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
+  // console.log(pageConfig.attributes)
+  let data = frontMatter(parsedFile)
   let result = md.render(data.body)
   res.render("index", {
     data: result,
@@ -39,10 +48,12 @@ app.get("/article/:route", (req, res) => {
 
 app.get("/", (req, res) => {
   let file = fs.readFileSync(`README.md`, {encoding: "utf8"})
-  let data = frontMatter(file)
+  let pageConfig = frontMatter(file)
+  let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
+  let data = frontMatter(parsedFile)
   let result = md.render(data.body)
   res.render("index", {
-    title: data.attributes.title,
+    title: `${data.attributes.title} - ${config.info.sitename} `,
     data: result,
     attr: data.attributes
   })
