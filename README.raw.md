@@ -1,3 +1,8 @@
+---
+title: Readme
+example: https://markdownitapp.mioun.repl.co/article/index
+---
+
 <a href="https://repl.it/github/syrup/markdownitapp"><img src="https://img.shields.io/badge/Repl.it-FORK-brightgreen" /></a>
 
 # How to Use
@@ -19,7 +24,7 @@ title: Your Title
 
 # Hello World
 > Blockquote
-[Link](https://markdownitapp.mioun.repl.co/)
+[Link]({{{ config.info.site }}})
 ```
 
 now check by going to the url `http://your-web.com/article/filename`
@@ -29,7 +34,7 @@ you can also custom css in `public/style.css`
 *Check the `config.toml` file for global configuration*
 *and frontmatter for inpage configuration*
 
-example open [https:&#x2F;&#x2F;markdownitapp.mioun.repl.co&#x2F;article&#x2F;index](https:&#x2F;&#x2F;markdownitapp.mioun.repl.co&#x2F;article&#x2F;index)
+example open [{{ attr.example }}]({{ attr.example }})
 
 to run server use
 ```bash 

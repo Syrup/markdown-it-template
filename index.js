@@ -41,6 +41,7 @@ app.get("/article/:route", (req, res) => {
   let result = md.render(data.body)
   res.render("index", {
     data: result,
+    darkmode: config.info.darkmode,
     title: data.attributes.title,
     attr: data.attributes
   })
@@ -55,6 +56,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     title: `${data.attributes.title} - ${config.info.sitename} `,
     data: result,
+    darkmode: config.info.darkmode,
     attr: data.attributes
   })
 })
