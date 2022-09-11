@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <head>
   <title><%= title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
   <link rel="stylesheet" href="/style.css">
   <!-- <style>
@@ -16,15 +17,16 @@
     }
   </style> -->
 </head>
-<body>
+<body class="<%= darkmode ? 'dark' : '' %>">
   <div class="container">
     <%- data %>
   </div>
   <script src="https://utteranc.es/client.js"
         repo="Syrup/markdownitapp"
-        issue-term="url"
+        issue-term="pathname"
         theme="<%= darkmode ? 'github-dark' : 'github-light' %>"
         crossorigin="anonymous"
         async>
     </script>
+  <script src="/script.js"></script>
 </body>

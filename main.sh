@@ -1,3 +1,4 @@
 npm install
+npm run encode
 clear
-node index.js
+npm start

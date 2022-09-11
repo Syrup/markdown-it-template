@@ -3,15 +3,15 @@ require("toml-require").install({
   toml: require('toml')
 })
 const fs = require("fs");
+const glob = require("glob")
 const frontMatter = require("front-matter");
 const hljs = require('highlight.js');
 const express = require("express");
 const path = require('path');
 const mustache = require("mustache")
 const app = express();
-app.use(express.static(path.join(__dirname, "public")))
-app.set("view engine", "ejs")
-app.set("views", path.join(__dirname, "views"))
+const http = require("http");
+const config = require("./config.toml")
 const md = require("markdown-it")({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
@@ -26,33 +26,38 @@ const md = require("markdown-it")({
   },
   html: true
 });
+app.use(express.static(path.join(__dirname, "public")))
+app.set("view engine", "ejs")
+app.set("views", path.join(__dirname, "views"))
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
-const http = require("http");
-// let data
-const config = require("./config.toml")
 
-
-app.get("/article/:route", (req, res) => {
-  let file = fs.readFileSync(`views/markdown/${req.params.route}.md`, { encoding: 'utf8' })
-  let pageConfig = frontMatter(file)
-  let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
-  // console.log(pageConfig.attributes)
-  let data = frontMatter(parsedFile)
-  let result = md.render(data.body)
-  res.render("index", {
-    data: result,
-    darkmode: config.info.darkmode,
-    title: data.attributes.title,
-    attr: data.attributes
+let cwd = `${process.cwd()}/views/markdown`
+let dir = glob.sync(`${process.cwd()}/views/markdown/**/*.md`)
+dir.forEach(path => {
+  app.get(path.split(".")[0].slice(cwd.length), (req, res) => {
+    let file = fs.readFileSync(path, "utf8")
+    console.log(file)
+    let pageConfig = frontMatter(file)
+    let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
+    let data = frontMatter(parsedFile)
+    let result = md.render(data.body)
+    res.render("index", {
+      data: result,
+      darkmode: config.info.darkmode,
+      title: data.attributes.title,
+      attr: data.attributes
+    })
   })
 })
 
+
 app.get("/", (req, res) => {
-  let file = fs.readFileSync(`README.md`, {encoding: "utf8"})
+  let file = fs.readFileSync(`README.raw.md`, {encoding: "utf8"})
   let pageConfig = frontMatter(file)
   let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
   let data = frontMatter(parsedFile)
   let result = md.render(data.body)
+  console.log(result)
   res.render("index", {
     title: `${data.attributes.title} - ${config.info.sitename} `,
     data: result,

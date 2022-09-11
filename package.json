@@ -9,13 +9,14 @@
     "encode": "node encode.js"
   },
   "dependencies": {
-    "markdown-it": "latest",
-    "highlight.js": "latest",
-    "front-matter": "latest",
+    "dotenv": "latest",
     "ejs": "latest",
     "express": "latest",
+    "front-matter": "latest",
+    "glob": "^8.0.3",
+    "highlight.js": "latest",
+    "markdown-it": "latest",
     "markdown-it-task-lists": "latest",
-    "dotenv": "latest",
     "mustache": "latest",
     "toml": "latest",
     "toml-require": "latest"
@@ -24,4 +25,3 @@
   "author": "Syrup",
   "license": "MIT"
 }
-
