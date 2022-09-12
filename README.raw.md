@@ -1,5 +1,7 @@
 ---
 title: README
+description: This is a website created by Markdown and EJS using ExpressJS Server
+image: https://cdn.mioun.repl.co/doll.png
 example: https://markdownitapp.mioun.repl.co/example
 ---
 
@@ -32,7 +34,8 @@ Now check by going to the url `http://your-web.com/article/filename`.
 You can also custom css in `public/style.css`.
 
 *Check `config.toml` file for global configuration*
-*and frontmatter for inpage configuration.*
+
+*and `frontmatter` for inpage configuration.*
 
 Example open [{{ attr.example }}]({{ attr.example }}).
 
@@ -48,6 +51,8 @@ npm start
 ```
 
 if it's the first time.
+
+And then, you can add anything you want like navbar :)
 
 ---
 

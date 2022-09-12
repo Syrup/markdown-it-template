@@ -29,14 +29,15 @@ const md = require("markdown-it")({
 app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
+app.disable("x-powered-by")
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
+md.use(require("markdown-it-emoji/light"))
 
 let cwd = `${process.cwd()}/views/markdown`
 let dir = glob.sync(`${process.cwd()}/views/markdown/**/*.md`)
 dir.forEach(path => {
   app.get(path.split(".")[0].slice(cwd.length), (req, res) => {
     let file = fs.readFileSync(path, "utf8")
-    console.log(file)
     let pageConfig = frontMatter(file)
     let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
     let data = frontMatter(parsedFile)
@@ -57,7 +58,6 @@ app.get("/", (req, res) => {
   let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
   let data = frontMatter(parsedFile)
   let result = md.render(data.body)
-  console.log(result)
   res.render("index", {
     title: `${data.attributes.title} - ${config.info.sitename} `,
     data: result,
