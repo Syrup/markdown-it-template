@@ -26,8 +26,9 @@ Now check by going to the url `http://your-web.com/article/filename`.
 
 You can also custom css in `public/style.css`.
 
-*Check the `config.toml` file for global configuration*
-*and frontmatter for inpage configuration.*
+*Check `config.toml` file for global configuration*
+
+*and `frontmatter` for inpage configuration.*
 
 Example open [https:&#x2F;&#x2F;markdownitapp.mioun.repl.co&#x2F;example](https:&#x2F;&#x2F;markdownitapp.mioun.repl.co&#x2F;example).
 
@@ -43,6 +44,8 @@ npm start
 ```
 
 if it's the first time.
+
+And then, you can add anything you want like navbar :)
 
 ---
 

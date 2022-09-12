@@ -1,5 +1,6 @@
 ---
 title: How To Create Post
+description: How to create new post
 ---
 
 Just create files/folders in `views/markdown`

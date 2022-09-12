@@ -20,7 +20,7 @@ const mustache = require("mustache")
 const frontMatter = require("front-matter");
 
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
-const config = require("./config.toml")
+const config = require("../config.toml")
 
 
 let newFile = fs.createWriteStream("README.md")

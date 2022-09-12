@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "encode": "node encode.js"
+    "build": "node cli/encode.js && node cli/minify.js"
   },
   "dependencies": {
+    "clean-css": "^5.3.1",
     "dotenv": "latest",
     "ejs": "latest",
     "express": "latest",
@@ -16,10 +17,12 @@
     "glob": "^8.0.3",
     "highlight.js": "latest",
     "markdown-it": "latest",
+    "markdown-it-emoji": "^2.0.2",
     "markdown-it-task-lists": "latest",
     "mustache": "latest",
     "toml": "latest",
-    "toml-require": "latest"
+    "toml-require": "latest",
+    "uglify-js": "^3.17.0"
   },
   "keywords": [],
   "author": "Syrup",

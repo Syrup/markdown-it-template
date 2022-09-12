@@ -3,4 +3,4 @@
 [info]
 site = "https://markdownitapp.mioun.repl.co/" # Replace with your web url
 sitename="markdownitapp" # Replace with your web name
-darkmode=true # Enable or disable darkmode (beta)
+darkmode=false # Enable or disable darkmode (beta)
