@@ -16,7 +16,7 @@ const md = require("markdown-it")({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return '<pre class="hljs"><code>' +
+        return `<pre class="hljs"><code class="${lang} language-${lang}">` +
                hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
                '</code></pre>';
       } catch (__) {}
@@ -31,7 +31,7 @@ app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 app.disable("x-powered-by")
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
-md.use(require("markdown-it-emoji/light"))
+md.use(require("markdown-it-emoji"))
 
 let cwd = `${process.cwd()}/views/markdown`
 let dir = glob.sync(`${process.cwd()}/views/markdown/**/*.md`)
@@ -45,6 +45,7 @@ dir.forEach(path => {
     res.render("index", {
       data: result,
       darkmode: config.info.darkmode,
+      config,
       title: data.attributes.title,
       attr: data.attributes
     })
@@ -61,6 +62,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     title: `${data.attributes.title} - ${config.info.sitename} `,
     data: result,
+    config,
     darkmode: config.info.darkmode,
     attr: data.attributes
   })

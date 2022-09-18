@@ -1,6 +1,14 @@
-# ALWAYS REFRESH REPL WHEN FILE IS EDITED
+# ALWAYS RESTART R WHEN FILE IS EDITED
 
 [info]
-site = "https://markdownitapp.mioun.repl.co/" # Replace with your web url
-sitename="markdownitapp" # Replace with your web name
+# This part
+# ---
+site = "https://markdown-it-template.mioun.repl.co/" # Replace with your web url
+sitename="markdown-it-template" # Replace with your web name
+# ---
+# Until this part is for testing purposes only
+
+[web]
 darkmode=false # Enable or disable darkmode (beta)
+darkTheme="github-dark-dimmed" # Theme for highlighting code (dark)
+lightTheme="equilibrium-gray-light" # Theme for highlighting code (light)

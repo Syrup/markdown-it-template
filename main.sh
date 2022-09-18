@@ -1,4 +1,4 @@
 npm install
-#npm run encode
+npm run encode
 clear
 npm start

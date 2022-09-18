@@ -4,7 +4,11 @@
   --bg: #fff;
   --text: #000;
   --link: #b08a23;
+  --warning: #d4d400ee;
+  --strike: #000;
   --summary: #333;
+  --code: rgb(255, 99, 208);
+  --code-bg: rgb(224, 224, 224);
 
   transition: 1.3 ease-out;
 }
@@ -14,8 +18,21 @@
   --text: #fff;
   --link: #8a6b16;
   --summary: #cfcfcf;
+  --warning: #dbdb00ee;
+  --strike: #fff;
+  --code: rgb(255, 120, 214);
+  --code-bg: rgba(150, 150, 150, .4);
 
-  transition: 1.3s ease-out;
+  transition: .4s ease-in;
+}
+
+body > .container :not(.hljs) code,
+body > .container > code {
+  background-color: var(--code-bg);
+  color: var(--code);
+  border-radius: 3px;
+  padding: 1.4px;
+  font-size: .67rem;
 }
 
 :link {
@@ -37,7 +54,7 @@ body {
 }
 
 body:not(.dark) {
-  transition: 1.3s ease-out;
+  transition: .7s ease-out;
 }
 
 div.container {
@@ -54,7 +71,6 @@ div.container h1 {
 pre.hljs {
   overflow-y: scroll;
   border-radius: 2px !important;
-  padding: 10px;
   width: 50%;
 }
 
@@ -67,6 +83,18 @@ blockquote {
 
 blockquote:before {
   color: #bababa;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote.warning {
+  border-left: 10px solid var(--warning);
+}
+
+blockquote.warning:before {
+  color: var(--warning);
   font-size: 4em;
   line-height: 0.1em;
   margin-right: 0.25em;
@@ -135,6 +163,10 @@ details > ul {
 
 
 .mode {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 1;
   display: block;
   cursor: pointer;
@@ -160,4 +192,8 @@ details > ul {
   right: 35px;
   bottom: 40px;
   background-color: #fff
+}
+
+strike, s {
+  color: var(--strike)
 }

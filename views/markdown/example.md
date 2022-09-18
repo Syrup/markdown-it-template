@@ -13,7 +13,7 @@ title: {{ attr.title }}
 description: {{ attr.description }}
 ---
 ```
-So, you can see what's in between --- right? you can retrieve the value with <code>&#123;&#123; attr.&lt;name&gt; &#125;&#125;</code>.
+So, you can see what's in between ``---`` right? you can retrieve the value with <code>&#123;&#123; attr.&lt;name&gt; &#125;&#125;</code>.
 
 Below is an example of using <code>&#123;&#123; atrr.description &#125;&#125;</code>:
 

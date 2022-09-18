@@ -78,24 +78,52 @@ document.querySelectorAll('details').forEach((el) => {
   new Accordion(el);
 });
 
-let dark = false
+
+
+
+
+
+
+let dark = document.body.classList[0] === "dark" ? true : false
+
+const linkdark = document.querySelector(`link[title="dark"]`)
+const linklight = document.querySelector(`link[title="light"]`)
 let btn = document.querySelector(".mode")
 let indicator;
 let color;
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", (e) => {
+  e.preventDefault()
   let indicator = dark ? "🌑" : "☀️";
-  let color = dark ? "#fff" : "#000"
-  document.body.classList.toggle("dark")
-  dark = !dark
-  btn.textContent = indicator
-  btn.classList.toggle("mode")
-  btn.classList.toggle("mode-dark")
+  // let color = dark ? "#fff" : "#000";
+  // const link = document.querySelector(`link[title=${dark ? "dark" : "light"}]`)
+  document.body.classList.toggle("dark");
+  dark = !dark;
+  btn.textContent = indicator;
+  btn.classList.toggle("mode");
+  btn.classList.toggle("mode-dark");
+  /*
+  if(linklight.disabled) linklight.removeAttribute("disabled")
+  if(!linklight.disabled) linklight.setAttribute("disabled", "disabled")
+  if(linkdark.disabled) linkdark.removeAttribute("disabled")
+  if(!linkdark.disabled) linkdark.setAttribute("disabled", "disabled")*/
+
+  document.querySelectorAll('link').forEach(link => {
+    if(!link.title) return
+
+    let disabled = link.disabled ? true : false
+
+    //if(link.title !== (dark ? "dark" : "light")) {
+      document.querySelector(`link[title="${dark ? "dark" : "light"}"]`).removeAttribute("disabled")
+      document.querySelector(`link[title="${dark ? "light" : "dark"}"]`).setAttribute("disabled", "disabled")
+    //}
+  })
+
 
   document
   .querySelector("iframe.utterances-frame")
   .contentWindow.postMessage(
     { type: "set-theme", theme: dark ? "github-dark" : "github-light" },
     "https://utteranc.es/"
-  )
+  );
 })
