@@ -1,6 +1,7 @@
 require("toml-require").install({
   toml: require('toml')
 })
+const hljs = require('highlight.js');
 const md = require("markdown-it")({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {

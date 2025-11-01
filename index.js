@@ -33,36 +33,53 @@ app.disable("x-powered-by")
 md.use(require("markdown-it-task-lists"), { label: true, labelAfter: true })
 md.use(require("markdown-it-emoji/light"))
 
+// Cache for processed markdown files
+const fileCache = new Map();
+
+// Function to process and cache markdown files
+function processMarkdownFile(filePath) {
+  if (fileCache.has(filePath)) {
+    return fileCache.get(filePath);
+  }
+  
+  const file = fs.readFileSync(filePath, "utf8");
+  const pageConfig = frontMatter(file);
+  const parsedFile = mustache.render(file, { config, attr: pageConfig.attributes });
+  const data = frontMatter(parsedFile);
+  const result = md.render(data.body);
+  
+  const processed = {
+    result,
+    attributes: data.attributes
+  };
+  
+  fileCache.set(filePath, processed);
+  return processed;
+}
+
 let cwd = `${process.cwd()}/views/markdown`
 let dir = glob.sync(`${process.cwd()}/views/markdown/**/*.md`)
-dir.forEach(path => {
-  app.get(path.split(".")[0].slice(cwd.length), (req, res) => {
-    let file = fs.readFileSync(path, "utf8")
-    let pageConfig = frontMatter(file)
-    let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
-    let data = frontMatter(parsedFile)
-    let result = md.render(data.body)
+dir.forEach(filePath => {
+  app.get(filePath.split(".")[0].slice(cwd.length), (req, res) => {
+    const { result, attributes } = processMarkdownFile(filePath);
     res.render("index", {
       data: result,
       darkmode: config.info.darkmode,
-      title: data.attributes.title,
-      attr: data.attributes
+      title: attributes.title,
+      attr: attributes
     })
   })
 })
 
 
 app.get("/", (req, res) => {
-  let file = fs.readFileSync(`README.raw.md`, {encoding: "utf8"})
-  let pageConfig = frontMatter(file)
-  let parsedFile = mustache.render(file, { config, attr: pageConfig.attributes })
-  let data = frontMatter(parsedFile)
-  let result = md.render(data.body)
+  const readmePath = `README.raw.md`;
+  const { result, attributes } = processMarkdownFile(readmePath);
   res.render("index", {
-    title: `${data.attributes.title} - ${config.info.sitename} `,
+    title: `${attributes.title} - ${config.info.sitename} `,
     data: result,
     darkmode: config.info.darkmode,
-    attr: data.attributes
+    attr: attributes
   })
 })
 
