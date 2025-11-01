@@ -9,20 +9,26 @@
   <meta name="og:title" content="<%= title %>">
   <meta name="og:image" content="<%= attr.image %>">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet"
+  <link rel="stylesheet" id="highlight-theme"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css">
-  <!-- <link rel="stylesheet" href="/style.css"> -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
   <link rel="stylesheet" href="/style.min.css">
-  <!-- <style>
-    div.container {
-      padding: 9px;
-    }
-    
-    pre.hljs {
-      padding: 10px;
-    }
-  </style> -->
+  <!-- Initialize dark mode before page renders to prevent flash -->
+  <script>
+    (function() {
+      const darkMode = localStorage.getItem('darkMode') === 'true' || <%= darkmode ? 'true' : 'false' %>;
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      }
+      // Set correct highlight.js theme immediately
+      const themeLink = document.getElementById('highlight-theme');
+      if (themeLink) {
+        themeLink.href = darkMode 
+          ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css'
+          : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css';
+      }
+    })();
+  </script>
 </head>
 <body class="<%= darkmode ? 'dark' : '' %>">
   <div class="container">
