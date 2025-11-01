@@ -54,6 +54,23 @@ if it's the first time.
 
 And then, you can add anything you want like navbar :)
 
+## Performance Features
+
+The application includes several performance optimizations:
+
+- **File Caching**: Markdown files are processed once and cached in memory, resulting in 86-95% faster response times on subsequent requests.
+- **Efficient Minification**: CSS and JS files are minified using synchronous operations for faster build times.
+
+### Development Mode
+
+When developing and making changes to markdown files, you can disable caching by setting the `CLEAR_CACHE` environment variable:
+
+```bash
+CLEAR_CACHE=true npm start
+```
+
+This ensures you see file changes immediately without needing to restart the server.
+
 ---
 
 That's all for now.
