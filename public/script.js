@@ -78,24 +78,52 @@ document.querySelectorAll('details').forEach((el) => {
   new Accordion(el);
 });
 
-let dark = false
-let btn = document.querySelector(".mode")
-let indicator;
-let color;
+// Dark mode functionality with localStorage persistence
+const DARK_MODE_KEY = 'darkMode';
 
+// Get initial dark mode state from localStorage or default to false
+let dark = localStorage.getItem(DARK_MODE_KEY) === 'true';
+let btn = document.querySelector(".mode");
+
+// Function to update dark mode
+function updateDarkMode(isDark) {
+  dark = isDark;
+  document.body.classList.toggle("dark", isDark);
+  btn.textContent = isDark ? "☀️" : "🌑";
+  btn.classList.toggle("mode", !isDark);
+  btn.classList.toggle("mode-dark", isDark);
+  
+  // Save preference to localStorage
+  localStorage.setItem(DARK_MODE_KEY, isDark);
+  
+  // Update utterances theme if iframe exists
+  const utterancesFrame = document.querySelector("iframe.utterances-frame");
+  if (utterancesFrame) {
+    utterancesFrame.contentWindow.postMessage(
+      { type: "set-theme", theme: isDark ? "github-dark" : "github-light" },
+      "https://utteranc.es/"
+    );
+  }
+  
+  // Update highlight.js theme
+  updateHighlightTheme(isDark);
+}
+
+// Function to update highlight.js theme dynamically
+function updateHighlightTheme(isDark) {
+  const existingTheme = document.querySelector('link[href*="highlight.js"]');
+  if (existingTheme) {
+    const newTheme = isDark 
+      ? '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css'
+      : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css';
+    existingTheme.href = newTheme;
+  }
+}
+
+// Set initial state on page load
+updateDarkMode(dark);
+
+// Add click event listener
 btn.addEventListener("click", () => {
-  let indicator = dark ? "🌑" : "☀️";
-  let color = dark ? "#fff" : "#000"
-  document.body.classList.toggle("dark")
-  dark = !dark
-  btn.textContent = indicator
-  btn.classList.toggle("mode")
-  btn.classList.toggle("mode-dark")
-
-  document
-  .querySelector("iframe.utterances-frame")
-  .contentWindow.postMessage(
-    { type: "set-theme", theme: dark ? "github-dark" : "github-light" },
-    "https://utteranc.es/"
-  )
-})
+  updateDarkMode(!dark);
+});
