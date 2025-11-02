@@ -56,7 +56,7 @@ pre.hljs code {
   position: relative;
 }
 
-.code-wrapper .code-lang {
+pre.hljs .code-lang {
   position: sticky;
   top: 0;
   left: 0;
