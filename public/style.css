@@ -51,6 +51,34 @@ pre.hljs {
   position: relative;
 }
 
+pre.hljs code {
+  display: block;
+  position: relative;
+}
+
+pre.hljs .code-lang {
+  position: sticky;
+  top: 0;
+  left: 0;
+  float: left;
+  background-color: transparent;
+  color: #888;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: none;
+  border-top-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  user-select: none;
+  pointer-events: none;
+  margin: 0;
+  margin-bottom: -14px;
+  display: inline-block;
+  z-index: 1;
+}
+
 .code-wrapper {
   position: relative;
   display: inline-block;
@@ -262,6 +290,11 @@ blockquote.alert[data-pico-color="red"] .alert-icon svg {
 
 blockquote.alert p:last-child {
   margin-bottom: 0;
+}
+
+:root.dark .code-lang {
+  background-color: transparent !important;
+  color: #666 !important;
 }
 
 @media screen and (max-width: 600px) {

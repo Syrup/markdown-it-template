@@ -2,13 +2,13 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, rmSync, mkdirSync
 import { join, dirname } from 'node:path';
 import { glob } from 'glob';
 import frontMatter from 'front-matter';
-import hljs from 'highlight.js';
 import Handlebars from 'handlebars';
 import ejs from 'ejs';
 import MarkdownIt from 'markdown-it';
 import markdownItTaskLists from 'markdown-it-task-lists';
 import markdownItEmoji from 'markdown-it-emoji/light.js';
 import markdownItAlerts from '../helpers/markdown-it-alerts.js';
+import { highlightCode } from '../helpers/highlight.js';
 import { parse as parseToml } from 'toml';
 import '../helpers/index.js';
 
@@ -16,16 +16,7 @@ const configFile = readFileSync(join(process.cwd(), 'config.toml'), 'utf8');
 const config = parseToml(configFile);
 
 const md = new MarkdownIt({
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return '<pre class="hljs"><code>' +
-               hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
-               '</code></pre>';
-      } catch (__) {}
-    }
-    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
-  },
+  highlight: highlightCode,
   html: true
 });
 
