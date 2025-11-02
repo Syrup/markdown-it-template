@@ -4,3 +4,4 @@
 site = "https://markdownitapp.mioun.repl.co/" # Replace with your web url
 sitename="markdownitapp" # Replace with your web name
 darkmode=false # Default dark mode setting (users can override with toggle button)
+css_framework="pico" # Options: "custom" (default), "pico" (classless CSS framework)

@@ -70,7 +70,15 @@ The application now includes a fully functional dark mode feature:
 - **Dynamic Themes**: Automatically switches highlight.js syntax highlighting theme to match the current mode
 - **Configuration**: Set the default mode in `config.toml` with the `darkmode` option (users can still override this with the toggle)
 
-### Development Mode
+## CSS Framework Options
+
+Choose between custom CSS or Pico CSS (classless framework):
+
+- Edit `config.toml` and set `css_framework` to:
+  - `"custom"` - Use custom styling (default)
+  - `"pico"` - Use Pico CSS for automatic semantic HTML styling
+
+## Development Mode
 
 When developing and making changes to markdown files, you can disable caching by setting the `CLEAR_CACHE` environment variable:
 
@@ -79,6 +87,51 @@ CLEAR_CACHE=true npm start
 ```
 
 This ensures you see file changes immediately without needing to restart the server.
+
+## Static Site Generation
+
+This project supports static site generation for deployment to serverless platforms like Vercel, Netlify, or GitHub Pages.
+
+### Development
+
+```bash
+npm install
+npm run dev    # Start development server
+```
+
+### Build for Production
+
+```bash
+npm run build  # Generates static site in /dist directory
+```
+
+### Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Or connect your GitHub repo to Vercel for automatic deployments.
+
+### Deploy to Netlify
+
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
+
+### Deploy to GitHub Pages
+
+1. Build the site: `npm run build`
+2. Push `dist` folder to `gh-pages` branch
+3. Enable GitHub Pages in repository settings
+
+### Project Structure
+
+- `/views/markdown/*.md` - Markdown content files
+- `/public/*` - Static assets (CSS, JS, images)
+- `/dist/*` - Built static site (generated)
 
 ---
 
@@ -93,7 +146,7 @@ That's all for now.
 >  2. [ ] Reach 10★ on Github
 
 
-<a href="https://github.com/Syrup/ markdownitapp">Github</a>
+<a href="https://github.com/Syrup/markdownitapp">Github</a>
 
 
 > CREDITS:
@@ -101,6 +154,6 @@ That's all for now.
 > 2. [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists)
 > 3. [highlight.js](https://github.com/highlightjs/highlight.js/)
 > 4. [front-matter](https://github.com/jxson/front-matter)
-> 5. [mustache](https://github.com/janl/mustache.js)
+> 5. [handlebars](https://github.com/handlebars-lang/handlebars.js)
   </div>
 </details>

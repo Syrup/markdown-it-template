@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "create webpage with markdown style with markdown-it",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "node cli/encode.js && node cli/minify.js"
+    "dev": "node index.js",
+    "minify": "node cli/encode.js && node cli/minify.js",
+    "build": "node cli/encode.js && node cli/minify.js && node cli/build.js"
   },
   "dependencies": {
     "clean-css": "^5.3.1",
@@ -14,17 +17,19 @@
     "ejs": "latest",
     "express": "latest",
     "front-matter": "latest",
-    "glob": "^8.0.3",
+    "glob": "^11.0.3",
+    "handlebars": "^4.7.8",
     "highlight.js": "latest",
     "markdown-it": "latest",
     "markdown-it-emoji": "^2.0.2",
     "markdown-it-task-lists": "latest",
-    "mustache": "latest",
     "toml": "latest",
-    "toml-require": "latest",
     "uglify-js": "^3.17.0"
   },
   "keywords": [],
   "author": "Syrup",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  }
 }

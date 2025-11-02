@@ -12,13 +12,25 @@
   <link rel="stylesheet" id="highlight-theme"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+  <% if (cssFramework === 'pico') { %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
+  <% } %>
   <link rel="stylesheet" href="/style.min.css">
   <!-- Initialize dark mode before page renders to prevent flash -->
   <script>
     (function() {
+      const usePico = <%= cssFramework === 'pico' ? 'true' : 'false' %>;
       const darkMode = localStorage.getItem('darkMode') === 'true' || <%= darkmode ? 'true' : 'false' %>;
       if (darkMode) {
         document.documentElement.classList.add('dark');
+        if (usePico) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } else if (usePico) {
+        document.documentElement.setAttribute('data-theme', 'light');
       }
       // Set correct highlight.js theme immediately
       const themeLink = document.getElementById('highlight-theme');

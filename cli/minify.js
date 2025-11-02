@@ -1,30 +1,43 @@
-const glob = require("glob")
-const cleanCSS = require('clean-css');
-const uglify = require("uglify-js")
-const fs = require("fs")
+import { glob } from 'glob';
+import CleanCSS from 'clean-css';
+import { minify as uglifyMinify } from 'uglify-js';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, basename, extname, join } from 'node:path';
 
-let css = glob.sync(`${process.cwd()}/public/**/*.css`)
+const css = await glob(`${process.cwd()}/public/**/*.css`);
 
-css.forEach(path => {
-  if(path.endsWith(".min.css")) return
-  let source = fs.readFileSync(path, "utf8")
-  let output = new cleanCSS().minify(source)
+for (const file of css) {
+  if(file.endsWith(".min.css")) continue;
+  const dir = dirname(file);
+  const base = basename(file, extname(file));
+  const minPath = join(dir, `${base}.min.css`);
+  const source = readFileSync(file, "utf8");
+  const output = new CleanCSS().minify(source);
+  
   if(output.errors && output.errors.length > 0) {
-    console.error(`Error minifying ${path}:`, output.errors)
-    return
+    console.error(`Error minifying ${file}:`, output.errors);
+    continue;
   }
-  fs.writeFileSync(`${path.split(".")[0]}.min.css`, output.styles)
-})
+  
+  writeFileSync(minPath, output.styles);
+  console.log(`Minified: ${file} -> ${minPath}`);
+}
 
-let js = glob.sync(`${process.cwd()}/public/**/*.js`)
+const js = await glob(`${process.cwd()}/public/**/*.js`);
 
-js.forEach(path => {
-  if(path.endsWith(".min.js")) return
-  let source = fs.readFileSync(path, "utf8")
-  let result = uglify.minify(source)
+for (const file of js) {
+  if(file.endsWith(".min.js")) continue;
+  const dir = dirname(file);
+  const base = basename(file, extname(file));
+  const minPath = join(dir, `${base}.min.js`);
+  const source = readFileSync(file, "utf8");
+  const result = uglifyMinify(source);
+  
   if(result.error) {
-    console.error(`Error minifying ${path}:`, result.error)
-    return
+    console.error(`Error minifying ${file}:`, result.error);
+    continue;
   }
-  fs.writeFileSync(`${path.split(".")[0]}.min.js`, result.code)
-})
+  
+  writeFileSync(minPath, result.code);
+  console.log(`Minified: ${file} -> ${minPath}`);
+}
