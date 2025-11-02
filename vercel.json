@@ -6,6 +6,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/:path*", "destination": "/:path*.html" }
+    { "source": "/((?!.*\\.).*)", "destination": "/$1.html" }
   ]
 }
