@@ -56,27 +56,27 @@ pre.hljs code {
   position: relative;
 }
 
-.code-lang {
-  position: sticky !important;
-  top: 0 !important;
-  left: 0 !important;
-  /* float: left !important; */ /* Removed to fix sticky positioning */
-  background-color: transparent !important;
-  color: #888 !important;
-  padding: 2px 6px !important;
-  font-size: 9px !important;
-  font-family: 'Courier New', monospace !important;
-  font-weight: 600 !important;
-  line-height: 1 !important;
-  text-transform: none !important;
-  border-top-left-radius: 2px !important;
-  border-bottom-right-radius: 3px !important;
-  user-select: none !important;
-  pointer-events: none !important;
-  margin: 0 !important;
-  margin-bottom: -14px !important;
-  display: inline-block !important;
-  z-index: 1 !important;
+.code-wrapper .code-lang {
+  position: sticky;
+  top: 0;
+  left: 0;
+  float: left;
+  background-color: transparent;
+  color: #888;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: none;
+  border-top-left-radius: 2px;
+  border-bottom-right-radius: 3px;
+  user-select: none;
+  pointer-events: none;
+  margin: 0;
+  margin-bottom: -14px;
+  display: inline-block;
+  z-index: 1;
 }
 
 .code-wrapper {
