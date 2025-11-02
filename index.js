@@ -3,13 +3,13 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { glob } from 'glob';
 import frontMatter from 'front-matter';
+import hljs from 'highlight.js';
 import express from 'express';
 import Handlebars from 'handlebars';
 import MarkdownIt from 'markdown-it';
 import markdownItTaskLists from 'markdown-it-task-lists';
 import markdownItEmoji from 'markdown-it-emoji/light.js';
 import markdownItAlerts from './helpers/markdown-it-alerts.js';
-import { highlightCode } from './helpers/highlight.js';
 import { parse as parseToml } from 'toml';
 import './helpers/index.js';
 
@@ -24,7 +24,16 @@ const config = parseToml(configFile);
 
 // Setup markdown-it
 const md = new MarkdownIt({
-  highlight: highlightCode,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+               hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+               '</code></pre>';
+      } catch (__) {}
+    }
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  },
   html: true
 });
 
