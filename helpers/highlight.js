@@ -7,8 +7,8 @@ export function highlightCode(str, lang) {
   if (lang && hljs.getLanguage(lang)) {
     try {
       const langLabel = `<span class="code-lang">${mdUtils.escapeHtml(lang)}</span>`;
-      return `<pre class="hljs" data-lang="${mdUtils.escapeHtml(lang)}">` +
-             langLabel +
+      return langLabel +
+             `<pre class="hljs" data-lang="${mdUtils.escapeHtml(lang)}">` +
              `<code>` +
              hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
              '</code></pre>';
